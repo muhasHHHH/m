@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>8 Наурыз құттықтау</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg1: #fff0f6;
+      --bg2: #ffe4ec;
+      --bg3: #fce7ff;
+      --card: rgba(255,255,255,0.72);
+      --text: #4a1d34;
+      --accent: #e11d74;
+      --accent2: #fb7185;
+      --accent3: #c026d3;
+      --shadow: 0 18px 45px rgba(190, 24, 93, 0.18);
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.9), transparent 35%),
+        linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    .petals, .sparkles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .petal, .spark {
+      position: absolute;
+      bottom: -60px;
+      animation: floatUp linear infinite;
+      opacity: 0.75;
+    }
+
+    .spark {
+      font-size: 18px;
+      opacity: 0.55;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(0deg) scale(0.8);
+        opacity: 0;
+      }
+      10% { opacity: 0.8; }
+      100% {
+        transform: translateY(-120vh) rotate(360deg) scale(1.15);
+        opacity: 0;
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.04); }
+    }
+
+    @keyframes shine {
+      from { transform: translateX(-180%) skewX(-25deg); }
+      to { transform: translateX(260%) skewX(-25deg); }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      width: min(1180px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 24px 0 36px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.7);
+      border-radius: 34px;
+      background: rgba(255,255,255,0.46);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+      padding: 34px;
+      animation: fadeUp 0.9s ease;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(45px);
+      z-index: 0;
+    }
+
+    .hero::before {
+      width: 230px;
+      height: 230px;
+      right: -70px;
+      top: -60px;
+      background: rgba(251, 113, 133, 0.32);
+    }
+
+    .hero::after {
+      width: 210px;
+      height: 210px;
+      left: -70px;
+      bottom: -70px;
+      background: rgba(192, 38, 211, 0.2);
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 26px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(255,255,255,0.8);
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(36px, 6vw, 68px);
+      line-height: 1.02;
+      color: #b0125a;
+      margin-bottom: 18px;
+    }
+
+    .lead {
+      font-size: clamp(18px, 2.2vw, 23px);
+      line-height: 1.75;
+      max-width: 760px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 26px;
+    }
+
+    .btn {
+      position: relative;
+      overflow: hidden;
+      border: none;
+      border-radius: 18px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 15px 22px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 12px 28px rgba(225, 29, 116, 0.18);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px) scale(1.03);
+    }
+
+    .btn-primary {
+      color: white;
+      background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3));
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    .btn-primary::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      width: 95px;
+      background: rgba(255,255,255,0.28);
+      transform: translateX(-160%) skewX(-25deg);
+      animation: shine 2.8s linear infinite;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.82);
+      color: var(--accent);
+      border: 1px solid rgba(225, 29, 116, 0.15);
+    }
+
+    .hero-side {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .circle {
+      position: relative;
+      width: min(380px, 100%);
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,228,236,0.86));
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 34px;
+    }
+
+    .circle::before,
+    .circle::after {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border-radius: 50%;
+      border: 2px dashed rgba(225, 29, 116, 0.18);
+      animation: spin 20s linear infinite;
+    }
+
+    .circle::after {
+      inset: 44px;
+      border-color: rgba(192, 38, 211, 0.18);
+      animation-direction: reverse;
+      animation-duration: 14s;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .circle-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .circle-heart {
+      font-size: clamp(70px, 10vw, 100px);
+      display: block;
+      margin-bottom: 12px;
+      animation: pulse 2.3s ease-in-out infinite;
+    }
+
+    .circle-title {
+      font-size: clamp(24px, 3vw, 34px);
+      font-weight: 800;
+      color: #b0125a;
+      margin-bottom: 10px;
+    }
+
+    .circle-text {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #7b274e;
+    }
+
+    .grid-3, .grid-2 {
+      display: grid;
+      gap: 22px;
+      margin-top: 22px;
+    }
+
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-2 { grid-template-columns: 1.15fr 0.85fr; }
+
+    .card, .section {
+      border: 1px solid rgba(255,255,255,0.7);
+      background: var(--card);
+      backdrop-filter: blur(10px);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 26px;
+      animation: fadeUp 0.9s ease;
+    }
+
+    .card:hover, .video-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 54px rgba(190, 24, 93, 0.22);
+    }
+
+    .card, .video-card {
+      transition: transform 0.28s ease, box-shadow 0.28s ease;
+    }
+
+    .card-icon {
+      font-size: 42px;
+      margin-bottom: 14px;
+    }
+
+    .card h2, .section h2 {
+      color: #b0125a;
+      font-size: clamp(24px, 3vw, 34px);
+      margin-bottom: 12px;
+    }
+
+    .card p, .section p {
+      font-size: 17px;
+      line-height: 1.75;
+    }
+
+    .message {
+      margin-top: 22px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,240,246,0.96));
+      border-radius: 30px;
+      border: 1px solid rgba(255,255,255,0.75);
+      box-shadow: var(--shadow);
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .message::before {
+      content: "💌";
+      position: absolute;
+      right: 24px;
+      top: 18px;
+      font-size: 48px;
+      opacity: 0.12;
+    }
+
+    .message h2 {
+      margin-bottom: 18px;
+      color: #b0125a;
+      font-size: clamp(28px, 4vw, 42px);
+    }
+
+    .message p {
+      font-size: clamp(18px, 2vw, 22px);
+      line-height: 1.9;
+    }
+
+    .wishes {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .wish {
+      text-align: center;
+      background: linear-gradient(135deg, rgba(255,238,245,0.95), rgba(255,255,255,0.8));
+      border: 1px solid rgba(225, 29, 116, 0.08);
+      padding: 15px 12px;
+      border-radius: 18px;
+      font-weight: 700;
+      color: #b0125a;
+    }
+
+    .video-wrap {
+      margin-top: 22px;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .video-card {
+      border-radius: 26px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.75);
+      background: rgba(255,255,255,0.65);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .video-card video {
+      width: 100%;
+      display: block;
+      background: #000;
+      max-height: 500px;
+      object-fit: cover;
+    }
+
+    .video-caption {
+      padding: 16px 18px 18px;
+    }
+
+    .video-caption h3 {
+      color: #b0125a;
+      margin-bottom: 8px;
+      font-size: 20px;
+    }
+
+    .video-caption p {
+      line-height: 1.65;
+      font-size: 15px;
+    }
+
+    .quote {
+      margin-top: 18px;
+      padding: 18px 20px;
+      border-radius: 20px;
+      background: linear-gradient(90deg, rgba(255,228,236,0.95), rgba(252,231,255,0.95));
+      font-size: 19px;
+      line-height: 1.7;
+      font-weight: 700;
+      color: #9d174d;
+    }
+
+    .footer {
+      margin-top: 22px;
+      text-align: center;
+      padding: 24px 16px 10px;
+      color: #9d174d;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .popup {
+      position: fixed;
+      inset: 0;
+      background: rgba(76, 5, 40, 0.45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 30;
+      padding: 16px;
+    }
+
+    .popup.active { display: flex; }
+
+    .popup-box {
+      width: min(700px, 100%);
+      border-radius: 28px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.97), rgba(255,241,247,0.96));
+      padding: 28px;
+      box-shadow: 0 30px 80px rgba(76, 5, 40, 0.32);
+      text-align: center;
+      animation: fadeUp 0.35s ease;
+    }
+
+    .popup-box h3 {
+      color: #b0125a;
+      font-size: 32px;
+      margin-bottom: 14px;
+    }
+
+    .popup-box p {
+      font-size: 20px;
+      line-height: 1.8;
+      margin-bottom: 18px;
+    }
+
+    .small-note {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #7b274e;
+      opacity: 0.85;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .grid-3,
+      .grid-2,
+      .video-grid,
+      .wishes {
+        grid-template-columns: 1fr;
+      }
+
+      .circle {
+        max-width: 380px;
+        margin: 0 auto;
+      }
+
+      .hero {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="petals" id="petals"></div>
+  <div class="sparkles" id="sparkles"></div>
+
+  <div class="wrap">
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <div class="badge">🌷 8 Наурыз құтты болсын!</div>
+          <h1>Қымбатты бұрынғы сыныптас қыздар, мерекелеріңізбен! 💐</h1>
+          <p class="lead">
+            Мектеп бітіргенімізге жарты жыл ғана өтсе де, бірге өткізген сәттеріміз,
+            сыныптағы күлкі, әзілі жарасқан күндер мен естеліктер әлі де жүректе сақтаулы.
+            Біз сендермен бір сыныпта оқығанымызға шын мәнінде қуаныштымыз. Сендер сол
+            жылдарды жарқын, көңілді және ерекше етіп кеттіңдер.
+          </p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" onclick="openWish()">Сюрпризті ашу ✨</button>
+            <button class="btn btn-secondary" onclick="document.getElementById('main-message').scrollIntoView({behavior:'smooth'})">Тілекті оқу ↓</button>
+          </div>
+        </div>
+
+        <div class="hero-side">
+          <div class="circle">
+            <div class="circle-inner">
+              <span class="circle-heart">💖</span>
+              <div class="circle-title">Ең жылы лебіз</div>
+              <div class="circle-text">Көктемдей құлпырып, армандай асқақтап, өмірлеріңіз бақытқа толы болсын</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid-3">
+      <div class="card">
+        <div class="card-icon">🌸</div>
+        <h2>Сендермен өткен күндер қымбат</h2>
+        <p>
+          Бір сыныпта оқып, бір дәлізде жүріп, бір күлкіге ортақ болу — жай ғана оқу емес,
+          бұл өмірде ұмытылмайтын ерекше кезең. Сол күндер үшін де, сол естеліктер үшін де
+          сендерге алғыс айтамыз.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">✨</div>
+        <h2>Жолдарыңыз әрдайым ашық болсын</h2>
+        <p>
+          Әрқайсыңыз өз жолыңызды тауып, армандарыңызға сеніммен қадам басып келесіздер.
+          Сол жол жарық, сәтті, қуанышты және берекелі болсын. Әр күн жаңа мүмкіндік,
+          әр ай жаңа жетістік әкелсін.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">💗</div>
+        <h2>Сұлулық пен мейірім өздеріңізбен бірге</h2>
+        <p>
+          Сендердің жүздеріңдегі күлкі, жүректеріңдегі жылулық пен жандарыңдағы нәзіктік
+          айналаға көрік береді. Әрқашан сондай шынайы, әдемі, ақылды және ерекше болып
+          қала беріңіздер.
+        </p>
+      </div>
+    </section>
+
+    <section class="message" id="main-message">
+      <h2>Арнайы құттықтау сөзі</h2>
+      <p>
+        Құрметті қыздар, 8 Наурыз мерекесі құтты болсын! Біз сендермен бір сыныпта оқығанымызға,
+        бір кезеңді бірге өткізгенімізге және сол шақтың куәсі болғанымызға өте қуаныштымыз.
+        Уақыт өтіп, бәріміз әр жаққа тарасақ та, мектептегі ортақ естеліктер жүректен өшпейді.
+        Сендер сыныптың ажарын кіргізіп, қарапайым күндерді де ерекше ете білдіңдер. Сол үшін де
+        сендерге деген құрметіміз бөлек.
+        <br /><br />
+        Бүгінгі әсем мерекеде әрқайсыңызға мықты денсаулық, таусылмас бақыт, шынайы махаббат,
+        көтеріңкі көңіл-күй және үлкен жетістіктер тілейміз. Армандарыңыз биік болсын, ал сол
+        армандарға апарар жолдарыңыз ашық болсын. Көктемнің гүліндей құлпырып, өмірдің әр сәтінен
+        қуаныш таба біліңіздер. Жандарыңыз тыныш, көңілдеріңіз шат, жүздеріңіз әрдайым нұрлы болсын.
+        Қай жерде жүрсеңіздер де, өздеріңізге лайық құрметке, жылулыққа және бақытқа кенеле беріңіздер!
+      </p>
+
+      <div class="wishes">
+        <div class="wish">Бақыт</div>
+        <div class="wish">Махаббат</div>
+        <div class="wish">Сәттілік</div>
+        <div class="wish">Шабыт</div>
+        <div class="wish">Көтеріңкі көңіл-күй</div>
+        <div class="wish">Әдемі сәттер</div>
+        <div class="wish">Арманның орындалуы</div>
+        <div class="wish">Жарқын болашақ</div>
+      </div>
+    </section>
+
+    <section class="video-wrap section">
+      <h2>Естелік видеолар 🎬</h2>
+      <p>
+        Осында бірге өткен сәттердің бір бөлігі сақталған. Бұл видеолар тек кадр емес,
+        бұл — балалық пен жастықтың, достықтың және ұмытылмайтын сәттердің ізі.
+      </p>
+
+      <div class="video-grid" style="margin-top:20px;">
+        <div class="video-card">
+          <video controls playsinline preload="metadata">
+            <source src="IMG_3957.MOV" type="video/quicktime" />
+            Браузер бұл видеоны көрсете алмады.
+          </video>
+          <div class="video-caption">
+            <h3>Естелік 1</h3>
+            <p>Кәдімгі бір сәттің өзінен ерекше жылулық сезілетін күндер ешқашан ұмытылмайды.</p>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <video controls playsinline preload="metadata">
+            <source src="IMG_3594.MOV" type="video/quicktime" />
+            Браузер бұл видеоны көрсете алмады.
+          </video>
+          <div class="video-caption">
+            <h3>Естелік 2</h3>
+            <p>Бір сыныпта оқып, бір-бірімізге үйреніп қалған уақыт жүректе әрдайым бөлек орын алады.</p>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <video controls playsinline preload="metadata">
+            <source src="IMG_9062.MOV" type="video/quicktime" />
+            Браузер бұл видеоны көрсете алмады.
+          </video>
+          <div class="video-caption">
+            <h3>Естелік 3</h3>
+            <p>Сол бір сәттерге қарап, өткен күндерге жылы сағынышпен күлімсірегің келеді.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="small-note">
+        Егер кей браузерде .MOV видеолар ашылмаса, оларды .MP4 форматына ауыстыруға болады.
+      </div>
+    </section>
+
+    <section class="grid-2">
+      <div class="section">
+        <h2>Неге бұл сайт ерекше?</h2>
+        <p>
+          Себебі бұл жай ғана ашық хат емес. Бұл — бірге оқыған адамдарға деген шынайы құрмет,
+          өткен күндерге деген сағыныш және сендерге арналған жүректен шыққан тілек. Уақыт өзгерсе де,
+          кей адамдар мен кей естеліктер ерекше болып қала береді.
+        </p>
+        <div class="quote">
+          «Біз сендермен бір сыныпта оқығанымызға қуанамыз. Сол шақтарымыз әлі де ыстық,
+          ал сендерге деген жақсы тілегіміз әрқашан шынайы.»
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Сайттағы приколюхалар</h2>
+        <p>🌸 Ұшып жүрген гүлдер мен жүрекшелер</p>
+        <p>💖 Сюрпризі бар батырма</p>
+        <p>✨ Жылтыр эффект және жұмсақ анимациялар</p>
+        <p>🎬 Видеоларға арналған әдемі блоктар</p>
+        <p>💌 Қатты, әсерлі құттықтау мәтіні</p>
+      </div>
+    </section>
+
+    <div class="footer">
+      Ізгі тілекпен — бұрынғы сыныптастарың ✨
+    </div>
+  </div>
+
+  <div class="popup" id="popup">
+    <div class="popup-box">
+      <h3>🌷 8 Наурыз құтты болсын!</h3>
+      <p>
+        Сіздерге әрдайым бақыт, махаббат, сәттілік және жарқын өмір тілейміз.
+        Күлкілеріңіз көп болып, жүректеріңіз тек қуанышқа толсын!
+      </p>
+      <button class="btn btn-primary" onclick="closeWish()">Жабу</button>
+    </div>
+  </div>
+
+  <script>
+    const petals = document.getElementById('petals');
+    const sparkles = document.getElementById('sparkles');
+    const flowerSet = ['🌸', '🌷', '💮', '💗', '✨'];
+
+    for (let i = 0; i < 28; i++) {
+      const el = document.createElement('div');
+      el.className = 'petal';
+      el.textContent = flowerSet[i % flowerSet.length];
+      el.style.left = (Math.random() * 100) + '%';
+      el.style.fontSize = (22 + Math.random() * 16) + 'px';
+      el.style.animationDuration = (7 + Math.random() * 6) + 's';
+      el.style.animationDelay = (Math.random() * 6) + 's';
+      petals.appendChild(el);
+    }
+
+    for (let i = 0; i < 18; i++) {
+      const el = document.createElement('div');
+      el.className = 'spark';
+      el.textContent = i % 2 === 0 ? '✨' : '💖';
+      el.style.left = (Math.random() * 100) + '%';
+      el.style.fontSize = (16 + Math.random() * 10) + 'px';
+      el.style.animationDuration = (8 + Math.random() * 5) + 's';
+      el.style.animationDelay = (Math.random() * 5) + 's';
+      sparkles.appendChild(el);
+    }
+
+    function openWish() {
+      document.getElementById('popup').classList.add('active');
+    }
+
+    function closeWish() {
+      document.getElementById('popup').classList.remove('active');
+    }
+
+    document.getElementById('popup').addEventListener('click', function (e) {
+      if (e.target.id === 'popup') closeWish();
+    });
+  </script>
+</body>
+</html>
